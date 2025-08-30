@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -36,10 +37,10 @@ public class User {
     private String lastName;
 
     @Column(name = "first_name")
-    private String firtsName;
+    private String firstName;
 
     @Column(name = "gender")
-    private char gender;
+    private boolean gender;
 
     @Column(name = "user_name")
     private String username;
@@ -58,6 +59,16 @@ public class User {
 
     @Column(name = "shipping_address")
     private String shippingAddress;
+    
+    @Column(name = "active")
+    private boolean active;
+
+    @Column(name = "activation_code")
+    private String activationCode;
+
+    @Column(name = "avatar", columnDefinition = "LONGTEXT")
+    @Lob
+    private String avatar;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
         CascadeType.PERSIST, CascadeType.MERGE, 
@@ -71,7 +82,7 @@ public class User {
     })
     private List<WishList> listWishLists;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
         CascadeType.PERSIST, CascadeType.MERGE, 
         CascadeType.DETACH, CascadeType.REFRESH
     })
@@ -87,5 +98,22 @@ public class User {
         CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE
     })
     private List<Order> listOrders;
+
+
+    public boolean isActive(){
+        return active;
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public String getActivationCode(){
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode){
+        this.activationCode = activationCode;
+    }
 
 }

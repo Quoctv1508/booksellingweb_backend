@@ -2,6 +2,8 @@ package vn.alaxed.booksellingweb_backend.entity;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,14 +37,15 @@ public class Image {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "data")
+    @Column(name = "data", columnDefinition = "LONGTEXT")
     @Lob
     private String data;
 
     @ManyToOne(cascade = {
         CascadeType.PERSIST, CascadeType.MERGE, 
-        CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE
+        CascadeType.DETACH, CascadeType.REFRESH
     } )
     @JoinColumn(name = "book_id", nullable = false)
+    @JsonIgnore
     private Book book;
 }

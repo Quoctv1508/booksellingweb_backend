@@ -68,7 +68,7 @@ public class Book {
     )
     private List<Category> listCategories;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {
+    @OneToMany(mappedBy = "book",orphanRemoval = true, fetch = FetchType.LAZY, cascade = {
         CascadeType.PERSIST, CascadeType.MERGE, 
         CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE
     })

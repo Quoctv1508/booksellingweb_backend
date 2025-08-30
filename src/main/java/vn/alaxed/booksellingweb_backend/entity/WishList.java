@@ -24,14 +24,14 @@ public class WishList {
 
     @ManyToOne(cascade = {
         CascadeType.PERSIST, CascadeType.MERGE, 
-        CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE
+        CascadeType.DETACH, CascadeType.REFRESH
     } )
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(cascade = {
         CascadeType.PERSIST, CascadeType.MERGE, 
-        CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE
+        CascadeType.DETACH, CascadeType.REFRESH
     } )
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
